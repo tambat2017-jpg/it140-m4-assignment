@@ -34,7 +34,9 @@ The worksheet intentionally asks questions instead of supplying the completed Hi
 
 **Your notes:**
 
-TODO: Summarize the program purpose in your own words.
+The program asks a player to select a range, chooses a random number
+within that range, and gives higher/lower feedback until the player guesses
+it correctly.
 
 ## 2. Identify Inputs and Outputs
 
@@ -44,12 +46,13 @@ TODO: Summarize the program purpose in your own words.
 
 **Inputs:**
 
-* TODO: Identify the range inputs.
-* TODO: Identify the repeated game input.
+* Lower bound and upper bound.
+* A guess after the range is established.
 
 **Outputs:**
 
-* TODO: Identify the required categories of output.
+* Prompts for bounds and guesses.
+* Validation messages and too-low, too-high, or success feedback.
 
 Do not choose exact message wording yet unless it helps you reason about the behavior.
 
@@ -61,8 +64,10 @@ Do not choose exact message wording yet unless it helps you reason about the beh
 
 **Your notes:**
 
-* TODO: Bounds validation rule and response.
-* TODO: Guess validation rule and response.
+* The lower bound must be less than the upper bound. When it is not, display
+  a message and obtain both bounds again.
+* A guess must be within the selected lower and upper bounds. When it is
+  outside the range, reject it and obtain another guess.
 
 ## 4. Identify Processing and Decisions
 
@@ -72,8 +77,8 @@ Do not choose exact message wording yet unless it helps you reason about the beh
 
 **Your notes:**
 
-* TODO: Generated value.
-* TODO: Required valid-guess outcomes.
+* A random target number between the valid lower and upper bounds.
+* Too low, too high, or equal to the target number.
 
 ## 5. Identify Repeated Behavior
 
@@ -83,9 +88,11 @@ Do not choose exact message wording yet unless it helps you reason about the beh
 
 **Your notes:**
 
-* TODO: Bounds-related repetition.
-* TODO: Guess-validation repetition.
-* TODO: Game repetition and stopping condition.
+* If bounds are invalid, request both bounds again until the lower bound is
+  less than the upper bound.
+* If a guess is outside the range, obtain another guess until it is valid.
+* Compare each valid guess with the target; continue after too-low or too-high
+  feedback and stop when the guess is correct.
 
 ## 6. Distinguish Requirements From Extra Features
 
@@ -95,8 +102,8 @@ Do not choose exact message wording yet unless it helps you reason about the beh
 
 **Your notes:**
 
-* TODO: Optional feature that should not become a graded requirement.
-* TODO: Another optional feature, or delete this line.
+* A fixed maximum number of guesses.
+* Guess counting or a score.
 
 ## 7. Analyze Checkpoint
 
@@ -121,11 +128,11 @@ Before moving to Design:
 
 **Your notes:**
 
-1. TODO
-2. TODO
-3. TODO
-4. TODO
-5. TODO
+1. Obtain and validate the lower and upper bounds.
+2. Generate a random target number in the valid range.
+3. Obtain a guess and validate it against the range.
+4. Compare the guess with the target and provide feedback.
+5. Repeat the guessing process until the target is guessed.
 
 ## 9. Plan Validation Before Detailed Pseudocode
 
@@ -135,8 +142,10 @@ Before moving to Design:
 
 **Your notes:**
 
-* TODO: Bounds-validation plan.
-* TODO: Guess-validation plan.
+* Check that the lower bound is less than the upper bound. If not, repeat
+  bound input until the relationship is satisfied.
+* Check that each guess is at least the lower bound and at most the upper
+  bound. If not, repeat guess input until it is valid.
 
 ## 10. Plan Repetition
 
@@ -151,7 +160,10 @@ For each repeated section, answer:
 
 **Your notes:**
 
-TODO: Summarize the loop structure in words without writing the completed pseudocode.
+Use a bounds-validation loop before random-number generation. Use a
+guess-validation loop for every guess. Use a game loop to continue after
+incorrect valid guesses. The bounds and guess loops stop after acceptable
+input is received, while the game loop stops after the target is guessed.
 
 ## 11. Plan Decision Branching
 
@@ -161,7 +173,9 @@ TODO: Summarize the loop structure in words without writing the completed pseudo
 
 **Your notes:**
 
-TODO: Identify the required outcomes without writing completed branch statements.
+If a valid guess is too low, display feedback and continue. If it is too
+high, display feedback and continue. If it equals the target, display success
+and stop.
 
 ## 12. Requirements-to-Design Traceability
 
@@ -169,12 +183,12 @@ After drafting `design/hilow_game.pseudo`, locate where your design addresses ea
 
 | Requirement group | Where it appears in your pseudocode |
 | --- | --- |
-| Bounds input and validation | TODO |
-| Random-number generation | TODO |
-| Guess input and validation | TODO |
-| Too-low / too-high / correct decisions | TODO |
-| Repetition until correct | TODO |
-| Required outputs | TODO |
+| Bounds input and validation | Establishing and validating the guessing range |
+| Random-number generation | Target-number generation after valid bounds |
+| Guess input and validation | Guess input and the guess range-validation loop |
+| Too-low / too-high / correct decisions | Valid-guess comparison branches |
+| Repetition until correct | Outer repeated guessing loop |
+| Required outputs | Input prompts and feedback/output statements |
 
 If a required behavior has no corresponding design step, revise the pseudocode.
 
@@ -184,11 +198,13 @@ If a required behavior has no corresponding design step, revise the pseudocode.
 
 Choose one scenario that includes repetition or validation. Follow your pseudocode one statement at a time.
 
-**Scenario:** TODO
+**Scenario:** A guess below the selected range
 
 **Trace notes:**
 
-TODO: Record the path through your pseudocode and what causes each branch or loop decision.
+The outer guessing section obtains the guess. The guess-validation loop
+rejects it because it is below the lower bound, outputs validation feedback,
+and obtains another guess. Only an in-range guess proceeds to comparison.
 
 ## 14. Rubric Review
 
