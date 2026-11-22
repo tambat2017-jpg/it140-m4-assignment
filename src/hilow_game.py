@@ -8,7 +8,7 @@ Process:
     repetition from your pseudocode.
 
 Output:
-    TODO: Identify the major categories of console output.
+    TODO: Identify the major categoriy of console output.
 """
 
 # === Imports ===
