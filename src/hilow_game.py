@@ -1,14 +1,14 @@
-"""TODO: Replace with a one-line summary of the optional practice program.
+"""Run an interactive higher/lower number guessing game.
 
 Input:
-    TODO: Identify the major user inputs.
+    A lower bound, an upper bound, and repeated guesses.
 
 Process:
-    TODO: Summarize validation, random selection, decisions, and
-    repetition from your pseudocode.
+    Validate the bounds and guesses, select a random target number,
+    provide guess feedback, and repeat until the target is found.
 
 Output:
-    TODO: Identify the major categoriy of console output.
+    Prompts, validation messages, guess feedback, and success messages.
 """
 
 # === Imports ===
@@ -19,17 +19,33 @@ from random import randint
 def main() -> None:
     """Run the optional higher/lower game practice program."""
 
-    # TODO: Obtain and validate the lower and upper bounds.
+    lower = int(input("Enter a lower bound: "))
+    upper = int(input("Enter an upper bound: "))
 
-    # TODO: Generate a random number from the valid range using randint.
+    while lower >= upper:
+        print("The lower bound must be less than the upper bound.")
+        lower = int(input("Enter a lower bound: "))
+        upper = int(input("Enter an upper bound: "))
 
-    # TODO: Obtain and validate the player's first guess.
+    target = randint(lower, upper)
 
-    # TODO: Repeat until the player guesses the random number.
-    # Give too-low or too-high feedback for incorrect valid guesses.
-    # Obtain and validate another guess when the game continues.
+    guess = int(input("Enter a guess between the selected bounds: "))
+    while guess < lower or guess > upper:
+        print("That guess is outside the selected bounds.")
+        guess = int(input("Enter another guess: "))
 
-    # TODO: Display a success message after the correct guess.
+    while guess != target:
+        if guess < target:
+            print("Your guess is too low.")
+        else:
+            print("Your guess is too high.")
+
+        guess = int(input("Enter a guess between the selected bounds: "))
+        while guess < lower or guess > upper:
+            print("That guess is outside the selected bounds.")
+            guess = int(input("Enter another guess: "))
+
+    print("Congratulations! You guessed the correct number.")
 
 
 # === Main Guard ===
@@ -37,5 +53,3 @@ if __name__ == "__main__":
     main()
 
 
-# === References ===
-# TODO: Add an APA-style reference for a source you used, or delete this line.
