@@ -17,7 +17,7 @@ from random import randint
 
 # === Main Function ===
 def main() -> None:
-    """Run the  higher/lower game practice program."""
+    """Run the optional higher/lower game practice program."""
 
     lower = int(input("Enter a lower bound: "))
     upper = int(input("Enter an upper bound: "))
