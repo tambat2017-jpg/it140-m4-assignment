@@ -1,4 +1,5 @@
 START hilow_game
+    OUTPUT "Welcome to the higher/lower game, Bella!"
     OUTPUT "Enter a lower bound:"
     INPUT lowerBound
     OUTPUT "Enter an upper bound:"
@@ -10,21 +11,30 @@ START hilow_game
         INPUT lowerBound
         OUTPUT "Enter an upper bound:"
         INPUT upperBound
-    SET targetNumber = GenerateRandomNumber(lowerBound, upperBound)
-    REPEAT
-        OUTPUT "Enter a guess between the selected bounds:"
-        INPUT guess
+    END WHILE
 
+    SET targetNumber = GenerateRandomNumber(lowerBound, upperBound)
+
+    OUTPUT "Great, now guess a number between " + lowerBound + " and " + upperBound + ":"
+    INPUT guess
+
+    WHILE guess != targetNumber
         WHILE guess < lowerBound OR guess > upperBound
             OUTPUT "That guess is outside the selected bounds."
             OUTPUT "Enter another guess:"
             INPUT guess
+        END WHILE
 
         IF guess < targetNumber
             OUTPUT "Your guess is too low."
         ELSE IF guess > targetNumber
             OUTPUT "Your guess is too high."
-        ELSE
-            OUTPUT "Congratulations! You guessed the correct number."
-    UNTIL guess = targetNumber
+        END IF
+        IF guess != targetNumber
+            OUTPUT "Enter another guess:"
+            INPUT guess
+        END IF
+    END WHILE
+
+    OUTPUT "Congratulations! You guessed the correct number."
 END hilow_game
